@@ -245,13 +245,13 @@ def plot_3fc_diff(file1in, file2in, file3in, file1o, file2o, file3o, varin, outp
     file3 = Dataset(file3in)
 
     # Extract soilt1 for time=0 and coordinates
-    soilti_file1 = file1[varin][:] #.isel(time=0)
-    soilti_file2 = file2[varin][:] #.isel(time=0)
-    soilti_file3 = file3[varin][:] #.isel(time=0)
+    soilti_file1 = file1[varin][0, :, :] #.isel(time=0)
+    soilti_file2 = file2[varin][0, :, :] #.isel(time=0)
+    soilti_file3 = file3[varin][0, :, :] #.isel(time=0)
 
     # Use 2D lat/lon grids for axes
-    lat = file1['latitude'][:]      # shape: (grid_yt, grid_xt)
-    lon = file1['longitude'][:]      # shape: (grid_yt, grid_xt)
+    lat = file1['lat'][:]      # shape: (grid_yt, grid_xt)
+    lon = file1['lon'][:]      # shape: (grid_yt, grid_xt)
     
     file1.close()
     file2.close()
@@ -262,9 +262,9 @@ def plot_3fc_diff(file1in, file2in, file3in, file1o, file2o, file3o, varin, outp
     file3 = Dataset(file3o)
 
     # Extract soilt1 for time=0 and coordinates
-    soilto_file1 = file1[varin][:] #.isel(time=0)
-    soilto_file2 = file2[varin][:] #.isel(time=0)
-    soilto_file3 = file3[varin][:] #.isel(time=0)
+    soilto_file1 = file1[varin][0, :, :] #.isel(time=0)
+    soilto_file2 = file2[varin][0, :, :] #.isel(time=0)
+    soilto_file3 = file3[varin][0, :, :] #.isel(time=0)
                              
     file1.close()
     file2.close()
@@ -347,13 +347,13 @@ file1o=dadir+"enkfgdas.20220501/06/ensstat/model/atmos/history/enkfgdas.t06z.sfc
 file2o=dadir+"enkfgdas.20220501/06/ensstat/model/atmos/history//enkfgdas.t06z.sfcf006.ensmean.nc"
 file3o=dadir+"enkfgdas.20220501/06/ensstat/model/atmos/history/enkfgdas.t06z.sfcf009.ensmean.nc"
 
-plot_3fc_diff(file1i, file2i, file3i, file1o, file2o, file3o, varin, "stc1_da_cont.png",
+plot_3fc_diff(file1i, file2i, file3i, file1o, file2o, file3o, "soilt1", "stc1_da_cont.png",
                             title1="Diff (DA-Control) enkfgdas.20220501/06/ensstat/sfcf003.ensmean soilt1 fhr003", title2="Diff stc1 fhr006", title3="Diff stc1 fhr009")
 
 file1o=noldir+"enkfgdas.20220501/06/ensstat/model/atmos/history/enkfgdas.t06z.sfcf003.ensmean.nc"
 file2o=noldir+"enkfgdas.20220501/06/ensstat/model/atmos/history//enkfgdas.t06z.sfcf006.ensmean.nc"
 file3o=noldir+"enkfgdas.20220501/06/ensstat/model/atmos/history/enkfgdas.t06z.sfcf009.ensmean.nc"
-plot_3fc_diff(file1i, file2i, file3i, file1o, file2o, file3o, varin, "stc1_nol_cont.png",
+plot_3fc_diff(file1i, file2i, file3i, file1o, file2o, file3o, "soilt1", "stc1_nol_cont.png",
                             title1="Diff (DAnoliau-Control) enkfgdas.20220501/06/ensstat/sfcf003.ensmean soilt1 fhr003", title2="Diff stc1 fhr006", title3="Diff stc1 fhr009")
 exit(0)
 
